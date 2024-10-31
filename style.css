@@ -1,0 +1,13 @@
+h1 {
+    /* display: flex;
+    justify-content: center; */
+    transform: translate(46.5%, 150%);
+    
+    
+}
+
+body {
+    background-color:rgb(166, 166, 243);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
