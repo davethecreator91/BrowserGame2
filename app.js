@@ -73,16 +73,22 @@ const cardDeck = [
     { color: "wild", value: "draw4", image: "UnoCards/wild+4.png" }
   ];
   
-
-const playerHand = [
+const players = [player1Hand, player2Hand];
+let currentPlayerIndex = 0;
+const player1Hand = [
 
 ]
 
+const player2Hand = [
 
+]
+
+// let player1 = true
+// let player2 = false
 
 //randomly shuffle cards into players hand
 
-// for each card in deck randomly pop into playerHand
+// for each card in deck randomly pop into player1Hand
 const deal1Rand = (cards) => {
     const randomIndex = Math.floor(Math.random() * cardDeck.length);
     const randomCard = cardDeck[randomIndex];
@@ -96,13 +102,13 @@ const deal1Rand = (cards) => {
     }
     // deal7Rand();
 
-deal7Rand(playerHand);
+deal7Rand(player1Hand);
 deal1Rand(tableCard);
-console.log(playerHand);
+console.log(player1Hand);
 console.log(tableCard)
 // deckSize = Object.keys(deck).length
 // console.log(deckSize)
-// console.log(dealCards(playerHand));
+// console.log(dealCards(player1Hand));
 
 // // creating players hand element
 // deckElement = document.createElement("p")
@@ -134,7 +140,7 @@ console.log(tableCard)
 // }
 
 // Function to display the player's hand
-function displayPlayerHand() {
+function displayplayer1Hand() {
     // Create a container div for the player's hand
     const handContainer = document.createElement("div");
     handContainer.style.display = "flex"; // Aligns cards in a row
@@ -145,8 +151,8 @@ function displayPlayerHand() {
     handContainer.style.transform = "translateY(210%)"
     // handContainer.style.align-content = "flex-end";
 
-    // Loop through each card in the playerHand and add it to the handContainer
-    playerHand.forEach(card => {
+    // Loop through each card in the player1Hand and add it to the handContainer
+    player1Hand.forEach(card => {
         const cardDiv = document.createElement("div");
         cardDiv.style.width = "100px";
         cardDiv.style.height = "150px";
@@ -172,7 +178,7 @@ function displayPlayerHand() {
     document.body.appendChild(handContainer);
 }
 
-displayPlayerHand(1);
+displayplayer1Hand(1);
 
 // function display
 
@@ -205,3 +211,75 @@ document.body.appendChild(tableCardContainer)
  }
 
  displayTableCard()
+
+ const displayDeck = () => {
+const deckContainer = document.createElement("div")
+deckContainer.style.height = "150px";
+deckContainer.style.width = "100px";
+deckContainer.addEventListener("click")
+const deckImg = document.createElement("img")
+deckImg.style.width = "100%"
+deckImg.style.height = "100%"
+deckImg.src = "UnoCards/UnoBack.png"
+deckImg.alt = "UnoBack"
+ }
+// player pushes selection to tablecard
+const playCard = () => {
+    deckContainer.onclick
+    player1Hand.push
+    tableCard.pop
+    console.log('selected card moved to tableCard')
+}
+
+// function playCard() {
+//     player1Hand.pop
+//     tableCard.push
+// }
+player1Hand.onclick.push(tableCard)
+
+//this button ends turn for current player and starts next player's turn
+
+endTurnButton = document.createElement("button")
+// endTurnButton.style.width = "50px";
+// endTurnButton.style.height = "50px";
+// e
+// endTurnButton.style.display = "flex";
+// endTurnButton.style.border = "1px black";
+// endTurnButton.style.cursor = "pointer";
+// Inline styles
+endTurnButton.style.position = "fixed";
+endTurnButton.style.bottom = "20px";
+endTurnButton.style.right = "20px";
+endTurnButton.style.padding = "10px 20px";
+endTurnButton.style.fontSize = "16px";
+endTurnButton.style.cursor = "pointer";
+
+endTurnButton.innerText = "End Turn"
+endTurnButton.addEventListener("click",changeTurns)
+
+document.body.appendChild(endTurnButton)
+
+
+
+//this changes turns based on a rotation between players
+// function changeTurns() {
+// if (player1 === true) {
+//     player1 = false;  
+//     player2 = true;
+// }
+//     else if (player2 === true) {
+//     player1 = true;  
+//     player2 = false;
+// }
+// }
+//attempt 2
+
+function changeTurns() {
+    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+}
+endTurnButton.onclick = changeTurns()
+//this determines who the current player is
+function currentPlayer() {
+return players[currentPlayerIndex];
+}
+

@@ -13,56 +13,55 @@
 
 const tableCard = [];
 const cardDeck = [
-    { color: "red", value: "0", image: "banana" },
-    { color: "red", value: "1", image: "UnoCards/red1.png" },
-    // { color: "red", value: "2", image: "banana" },
-    // { color: "red", value: "3", image: "banana" },
-    // { color: "red", value: "4", image: "banana" },
-    // { color: "red", value: "5", image: "banana" },
-    // { color: "red", value: "6", image: "banana" },
-    // { color: "red", value: "7", image: "banana" },
-    // { color: "red", value: "8", image: "banana" },
-    // { color: "red", value: "9", image: "banana" },
-    // { color: "red", value: "skip", image: "banana" },
-    // { color: "red", value: "reverse", image: "banana" },
-    // { color: "red", value: "draw2", image: "banana" },
-    // { color: "yellow", value: "0", image: "banana" },
-    // { color: "yellow", value: "1", image: "banana" },
-    // ... add the rest of the cards as in your original array
+  { color: "red", value: "0", image: "banana" },
+  { color: "red", value: "1", image: "UnoCards/red1.png" },
+  // { color: "red", value: "2", image: "banana" },
+  // { color: "red", value: "3", image: "banana" },
+  // { color: "red", value: "4", image: "banana" },
+  // { color: "red", value: "5", image: "banana" },
+  // { color: "red", value: "6", image: "banana" },
+  // { color: "red", value: "7", image: "banana" },
+  // { color: "red", value: "8", image: "banana" },
+  // { color: "red", value: "9", image: "banana" },
+  // { color: "red", value: "skip", image: "banana" },
+  // { color: "red", value: "reverse", image: "banana" },
+  // { color: "red", value: "draw2", image: "banana" },
+  // { color: "yellow", value: "0", image: "banana" },
+  // { color: "yellow", value: "1", image: "banana" },
+  // ... add the rest of the cards as in your original array
 ];
 
-const playerHand = [];
+const player1Hand = [];
 
 //old function for random cards
 // const deal7RandomCards = () => {
 //     for (let i = 1; i < 8; i++) {
 //         const randomIndex = Math.floor(Math.random() * cardDeck.length)
 //         const randomCard = cardDeck[randomIndex]
-//         playerHand.push(randomCard);
+//         player1Hand.push(randomCard);
 //     }
 // }
 // deal7RandomCards();
 // Function to randomly shuffle cards into player's hand
 const deal1Rand = (cards) => {
-const randomIndex = Math.floor(Math.random() * cardDeck.length);
-const randomCard = cardDeck[randomIndex];
-cards.push(randomCard);
-}
+  const randomIndex = Math.floor(Math.random() * cardDeck.length);
+  const randomCard = cardDeck[randomIndex];
+  cards.push(randomCard);
+};
 
 const deal7Rand = () => {
-for (let i=0; i<7;i++) {
+  for (let i = 0; i < 7; i++) {
     deal1Rand();
-}
-}
+  }
+};
 // deal7Rand();
 deal1Rand(tableCard);
-deal1Rand(playerHand)
+deal1Rand(player1Hand);
 console.log(tableCard);
-console.log(playerHand)
-
+console.log(player1Hand);
 
 // // Function to display the player's hand
-// function displayPlayerHand() {
+// function displayplayer1Hand() {
 //     // Create a container div for the player's hand
 //     const handContainer = document.createElement("div");
 //     handContainer.style.display = "flex"; // Aligns cards in a row
@@ -70,8 +69,8 @@ console.log(playerHand)
 //     handContainer.style.border = "1px solid #333";
 //     handContainer.style.padding = "10px";
 
-//     // Loop through each card in the playerHand and add it to the handContainer
-//     playerHand.forEach(card => {
+//     // Loop through each card in the player1Hand and add it to the handContainer
+//     player1Hand.forEach(card => {
 //         const cardDiv = document.createElement("div");
 //         cardDiv.style.width = "100px";
 //         cardDiv.style.height = "150px";
@@ -94,14 +93,18 @@ console.log(playerHand)
 //     document.body.appendChild(handContainer);
 // }
 
-// displayPlayerHand(1);
-
-
+// displayplayer1Hand(1);
 
 // function deal1card() {
 //     randomIndex = Math.floor(Math.random) * cardDeck.length;
 //     randomCard = cardDeck[randomIndex]
-//     playerHand.push(randomCard)
+//     player1Hand.push(randomCard)
 // }
 
 // console.log(deal1card())
+
+//test to see how to handle color matching
+
+// if tableCard.color === red {
+//     player1Hand
+// }
