@@ -1,10 +1,9 @@
 
 
-const tableCard = [
 
-]
-//Glen's Suggestion
-//I have every card .png exept 0 card
+
+//below are the main objects of the game
+////////////Objects///////////////////////////
 const cardDeck = [
     // { color: "red", value: "0", image: "UnoCards/.png" },
     { color: "red", value: "1", image: "UnoCards/red1.png" },
@@ -73,8 +72,10 @@ const cardDeck = [
     { color: "wild", value: "draw4", image: "UnoCards/wild+4.png" }
   ];
   
-const players = [player1Hand, player2Hand];
-let currentPlayerIndex = 0;
+const tableCard = [
+
+  ]
+
 const player1Hand = [
 
 ]
@@ -83,12 +84,11 @@ const player2Hand = [
 
 ]
 
-// let player1 = true
-// let player2 = false
+const players = [player1Hand, player2Hand];
+let currentPlayerIndex = 0;
 
 //randomly shuffle cards into players hand
 
-// for each card in deck randomly pop into player1Hand
 const deal1Rand = (cards) => {
     const randomIndex = Math.floor(Math.random() * cardDeck.length);
     const randomCard = cardDeck[randomIndex];
@@ -102,47 +102,23 @@ const deal1Rand = (cards) => {
     }
     // deal7Rand();
 
+// call to console and run dealing cards function
 deal7Rand(player1Hand);
 deal1Rand(tableCard);
 console.log(player1Hand);
 console.log(tableCard)
-// deckSize = Object.keys(deck).length
-// console.log(deckSize)
-// console.log(dealCards(player1Hand));
 
-// // creating players hand element
-// deckElement = document.createElement("p")
-// deckElement.innerText = 
-
-// function addElement() {
-// const newDiv = document.createElement("div");
-// newDiv.style.width = "200px";
-// newDiv.style.height = "200px";
-// newDiv.style.border = "1px solid black";
-// newDiv.style.overflow = "hidden";
-// }
-
-// function displayImageFromCardDeck(index) {
-//         // Ensure the index is within bounds (adapted from GPT4)
-//         if (index < 0 || index >= cardDeck.length) {
-//             console.error("Index out of bounds");
-//             return;
-//         }
-// const imagePath = cardDeck[index].image;//test card, replace later with table hand or player hand
-// const img = document.createElement("img");
-// img.src = imagePath;
-// img.alt = `${cardDeck[index].color} ${cardDeck[index].value}`
-
-// document.body.appendChild(img);
-
-// newDiv.appendchild(cardImg)
-// document.body.appendChild(newDiv)
-// }
 
 // Function to display the player's hand
+
 function displayplayer1Hand() {
+    // remove existing hand to update
+    const existingHandContainer = document.getElementById("player1-hand");
+    if (existingHandContainer) existingHandContainer.remove();
     // Create a container div for the player's hand
+    
     const handContainer = document.createElement("div");
+    handContainer.id = "player1-hand";
     handContainer.style.display = "flex"; // Aligns cards in a row
     handContainer.style.gap = "10px"; // Adds space between cards
     handContainer.style.border = "1px solid #333";
@@ -161,6 +137,8 @@ function displayplayer1Hand() {
         cardDiv.style.borderRadius = "5px";
         cardDiv.addEventListener('click',() => {
             console.log('You clicked me!')
+            playCard()
+            // cardDiv.onclick.push(tableCard)
         })
 
         const cardImg = document.createElement("img");
@@ -177,20 +155,28 @@ function displayplayer1Hand() {
     // Append the player's hand container to the body
     document.body.appendChild(handContainer);
 }
-
 displayplayer1Hand(1);
+////////////////Display to DOM//////////////////
 
-// function display
+
+//  function to display table card
 
  const displayTableCard = (card) => {
+
+// refreshes page
+const existingTableCardContainer = document.getElementById("table-card");
+if (existingTableCardContainer) existingTableContainer.remove();
+
 //create table card container div
+
 const tableCardContainer = document.createElement("div");
+tableCardContainer.id = "table-card";
 tableCardContainer.style.width = "100px";
 tableCardContainer.style.height = "150px";
 tableCardContainer.style.border = "1px solid black";
 tableCardContainer.style.display = "flex";
 // tableCardContainer.style.justifyContent = "center";
-tableCardContainer.style.transform = "translate(475%, -50%)";
+tableCardContainer.style.transform = "translate(525%, -50%)";
 tableCardContainer.style.borderRadius = "5px";
 
 
@@ -209,77 +195,75 @@ tableCardContainer.appendChild(tableCardImg)
 document.body.appendChild(tableCardContainer)
 //go back to container div and style to put in center of screen
  }
-
  displayTableCard()
 
- const displayDeck = () => {
+// function to display Deck
+ const displayDeck = () => {    
 const deckContainer = document.createElement("div")
 deckContainer.style.height = "150px";
 deckContainer.style.width = "100px";
-deckContainer.addEventListener("click")
+deckContainer.style.border = "1px solid black";
+deckContainer.style.transform = "translate(390%, -150%)"
+deckContainer.addEventListener("click", () => {
+    console.log("Deck clicked!");
+});
 const deckImg = document.createElement("img")
-deckImg.style.width = "100%"
-deckImg.style.height = "100%"
-deckImg.src = "UnoCards/UnoBack.png"
-deckImg.alt = "UnoBack"
- }
-// player pushes selection to tablecard
-const playCard = () => {
-    deckContainer.onclick
-    player1Hand.push
-    tableCard.pop
-    console.log('selected card moved to tableCard')
-}
+deckImg.style.width = "100%";
+deckImg.style.height = "100%";
+deckImg.src = "UnoCards/UnoBack.png";
+deckImg.alt = "UnoBack";
 
-// function playCard() {
-//     player1Hand.pop
-//     tableCard.push
-// }
-player1Hand.onclick.push(tableCard)
+deckContainer.appendChild(deckImg);
+document.body.appendChild(deckContainer);
+ }
+ displayDeck()
+
+//
+
+//////////////////ENABLE INTERACION/////////////////
+// player pushes selection to tablecard
+const playCard = (cardIndex) => {
+    
+    playedCard = player1Hand.splice(cardIndex, 1)[0];
+    // player1Hand.pop(playedCard)
+    tableCard.push(playedCard)
+    console.log('selected card moved to tableCard')
+    updateTable()
+}
+// Function to display the played card on the table
+function updateTable() {
+    const tableCardContainer = document.getElementById("table-card");
+    if (tableCardContainer && tableCard.length > 0) {
+        const playedCard = tableCard[tableCard.length - 1]; // Last card on table
+        tableCardContainer.querySelector("img").src = playedCard.image;
+        tableCardContainer.querySelector("img").alt = `${playedCard.color} ${playedCard.value}`;
+    }
+}
 
 //this button ends turn for current player and starts next player's turn
 
 endTurnButton = document.createElement("button")
-// endTurnButton.style.width = "50px";
-// endTurnButton.style.height = "50px";
-// e
-// endTurnButton.style.display = "flex";
-// endTurnButton.style.border = "1px black";
-// endTurnButton.style.cursor = "pointer";
-// Inline styles
 endTurnButton.style.position = "fixed";
 endTurnButton.style.bottom = "20px";
 endTurnButton.style.right = "20px";
 endTurnButton.style.padding = "10px 20px";
 endTurnButton.style.fontSize = "16px";
 endTurnButton.style.cursor = "pointer";
-
 endTurnButton.innerText = "End Turn"
 endTurnButton.addEventListener("click",changeTurns)
-
 document.body.appendChild(endTurnButton)
 
+//Start Button
+startButton = document.createElement("button")
+startButton.innerText = "Start";
+startButton.style.padding = "10px 20px"
+startButton.style.transform = "translate(690%, -500%)"
+startButton.style.cursor = "pointer";
+document.body.appendChild(startButton)
 
 
-//this changes turns based on a rotation between players
-// function changeTurns() {
-// if (player1 === true) {
-//     player1 = false;  
-//     player2 = true;
-// }
-//     else if (player2 === true) {
-//     player1 = true;  
-//     player2 = false;
-// }
-// }
-//attempt 2
 
 function changeTurns() {
     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-}
-endTurnButton.onclick = changeTurns()
-//this determines who the current player is
-function currentPlayer() {
-return players[currentPlayerIndex];
 }
 

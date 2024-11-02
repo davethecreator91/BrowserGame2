@@ -108,3 +108,56 @@ console.log(player1Hand);
 // if tableCard.color === red {
 //     player1Hand
 // }
+
+// deckSize = Object.keys(deck).length
+
+// console.log(deckSize)
+// console.log(dealCards(player1Hand));
+
+// // creating players hand element
+// deckElement = document.createElement("p")
+// deckElement.innerText = 
+
+// function addElement() {
+// const newDiv = document.createElement("div");
+// newDiv.style.width = "200px";
+// newDiv.style.height = "200px";
+// newDiv.style.border = "1px solid black";
+// newDiv.style.overflow = "hidden";
+// }
+
+// function displayImageFromCardDeck(index) {
+//         // Ensure the index is within bounds (adapted from GPT4)
+//         if (index < 0 || index >= cardDeck.length) {
+//             console.error("Index out of bounds");
+//             return;
+//         }
+// const imagePath = cardDeck[index].image;//test card, replace later with table hand or player hand
+// const img = document.createElement("img");
+// img.src = imagePath;
+// img.alt = `${cardDeck[index].color} ${cardDeck[index].value}`
+
+// document.body.appendChild(img);
+
+// newDiv.appendchild(cardImg)
+// document.body.appendChild(newDiv)
+// }
+
+//this changes turns based on a rotation between players
+// function changeTurns() {
+// if (player1 === true) {
+//     player1 = false;  
+//     player2 = true;
+// }
+//     else if (player2 === true) {
+//     player1 = true;  
+//     player2 = false;
+// }
+// }
+//attempt 2
+
+// endTurnButton.onclick = changeTurns()
+// //this determines who the current player is
+// function currentPlayer() {
+// return players[currentPlayerIndex];
+// }
