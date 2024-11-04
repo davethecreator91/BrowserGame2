@@ -161,3 +161,5 @@ console.log(player1Hand);
 // function currentPlayer() {
 // return players[currentPlayerIndex];
 // }
+
+    // player1Hand.pop(playedCard)

@@ -103,8 +103,8 @@ const deal1Rand = (cards) => {
     // deal7Rand();
 
 // call to console and run dealing cards function
-deal7Rand(player1Hand);
-deal1Rand(tableCard);
+// deal7Rand(player1Hand);
+// deal1Rand(tableCard);
 console.log(player1Hand);
 console.log(tableCard)
 
@@ -119,25 +119,28 @@ function displayplayer1Hand() {
     
     const handContainer = document.createElement("div");
     handContainer.id = "player1-hand";
+    // handContainer.style.position = "sticky";
     handContainer.style.display = "flex"; // Aligns cards in a row
+    // handContainer.style.position = "fixed"
     handContainer.style.gap = "10px"; // Adds space between cards
     handContainer.style.border = "1px solid #333";
     handContainer.style.padding = "10px";
     handContainer.style.borderRadius = "5px";
-    handContainer.style.transform = "translateY(210%)"
+    handContainer.style.transform = "translateY(160%)"
     // handContainer.style.align-content = "flex-end";
 
     // Loop through each card in the player1Hand and add it to the handContainer
-    player1Hand.forEach(card => {
+    player1Hand.forEach((card, index) => {
         const cardDiv = document.createElement("div");
         cardDiv.style.width = "100px";
         cardDiv.style.height = "150px";
         cardDiv.style.border = "1px solid black";
         cardDiv.style.overflow = "hidden";
         cardDiv.style.borderRadius = "5px";
+        
         cardDiv.addEventListener('click',() => {
             console.log('You clicked me!')
-            playCard()
+            playCard(index)
             // cardDiv.onclick.push(tableCard)
         })
 
@@ -155,7 +158,7 @@ function displayplayer1Hand() {
     // Append the player's hand container to the body
     document.body.appendChild(handContainer);
 }
-displayplayer1Hand(1);
+// displayplayer1Hand(1);
 ////////////////Display to DOM//////////////////
 
 
@@ -175,7 +178,6 @@ tableCardContainer.style.width = "100px";
 tableCardContainer.style.height = "150px";
 tableCardContainer.style.border = "1px solid black";
 tableCardContainer.style.display = "flex";
-// tableCardContainer.style.justifyContent = "center";
 tableCardContainer.style.transform = "translate(525%, -50%)";
 tableCardContainer.style.borderRadius = "5px";
 
@@ -195,7 +197,7 @@ tableCardContainer.appendChild(tableCardImg)
 document.body.appendChild(tableCardContainer)
 //go back to container div and style to put in center of screen
  }
- displayTableCard()
+//  displayTableCard()
 
 // function to display Deck
  const displayDeck = () => {    
@@ -216,7 +218,7 @@ deckImg.alt = "UnoBack";
 deckContainer.appendChild(deckImg);
 document.body.appendChild(deckContainer);
  }
- displayDeck()
+//  displayDeck()
 
 //
 
@@ -224,12 +226,14 @@ document.body.appendChild(deckContainer);
 // player pushes selection to tablecard
 const playCard = (cardIndex) => {
     
-    playedCard = player1Hand.splice(cardIndex, 1)[0];
-    // player1Hand.pop(playedCard)
-    tableCard.push(playedCard)
+    const playedCard = player1Hand.splice(cardIndex, 1)[0];
+    tableCard.push(playedCard);
     console.log('selected card moved to tableCard')
-    updateTable()
+    displayplayer1Hand();
+    updateTable();
 }
+
+
 // Function to display the played card on the table
 function updateTable() {
     const tableCardContainer = document.getElementById("table-card");
@@ -242,28 +246,77 @@ function updateTable() {
 
 //this button ends turn for current player and starts next player's turn
 
-endTurnButton = document.createElement("button")
+endTurnButton = document.createElement("button");
 endTurnButton.style.position = "fixed";
 endTurnButton.style.bottom = "20px";
 endTurnButton.style.right = "20px";
 endTurnButton.style.padding = "10px 20px";
 endTurnButton.style.fontSize = "16px";
 endTurnButton.style.cursor = "pointer";
-endTurnButton.innerText = "End Turn"
-endTurnButton.addEventListener("click",changeTurns)
-document.body.appendChild(endTurnButton)
+endTurnButton.innerText = "End Turn";
+// endTurnButton.addEventListener("click",changeTurns)
+// document.body.appendChild(endTurnButton)
+
+const startGame = () => {
+    deal1Rand(tableCard);
+    deal7Rand(player1Hand);
+    displayplayer1Hand();
+    displayTableCard(tableCard[0]);
+    displayDeck();
+    document.body.appendChild(endTurnButton)
+    document.body.removeChild(startButton)
+    document.body.appendChild(UnoOutButton);
+    }
 
 //Start Button
-startButton = document.createElement("button")
+startButton = document.createElement("button");
+startButton.display = "flex";
+// startButton.style.justifyContent = "center";
+// startButton.style.alignItems = "center";
+startButton.style.position = "fixed";
 startButton.innerText = "Start";
-startButton.style.padding = "10px 20px"
-startButton.style.transform = "translate(690%, -500%)"
+startButton.style.padding = "10px 20px";
+// startButton.style.transform = "translate(450%, 250%)";
 startButton.style.cursor = "pointer";
-document.body.appendChild(startButton)
+console.log(startButton);
+document.body.appendChild(startButton);
+startButton.addEventListener("click", startGame);
+
+UnoOutButton = document.createElement("button");
+UnoOutButton.style.position = "fixed";
+UnoOutButton.style.bottom = "100px";
+UnoOutButton.style.right = "20px";
+UnoOutButton.style.padding = "10px 20px";
+UnoOutButton.style.fontSize = "16px";
+UnoOutButton.style.cursor = "pointer";
+UnoOutButton.innerText = "Uno Out";
+UnoOutButton.addEventListener("click",endGame);
+
+
+gameResult = document.createElement("p")
+gameResult.innerText = "You Win"
+// document.addEventListener("click",)
+
+// function changeTurns() {
+//     currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+// }
+
+////////////////////GAME STATE//////////////////
 
 
 
-function changeTurns() {
-    currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+const endGame = () => {
+
+    // if (player1Hand.length = 0)
+    //     return
+document.body.removeChild(document.getElementById(player1Hand));
+document.body.removeChild(document.getElementById(tableCard));
+document.body.removeChild(document.getElementById(deckContainer));
+document.body.removeChild(endTurnButton);
+document.body.removeChild(UnoOutButton);
 }
 
+// const gameState = () => {
+
+
+// }
